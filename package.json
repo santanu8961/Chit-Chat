@@ -1,0 +1,18 @@
+{
+  "name": "node-chat-app",
+  "version": "1.0.0",
+  "description": "chat App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "9.11.2"
+    
+  },
+  "author": "Santanu Roy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
