@@ -11,11 +11,29 @@ app.use(express.static(publicPath));
 const server = http.createServer(app);
 var io = socketIO(server);
 
+
 io.on('connection',(socket)=>{
     console.log('New User Connected..')
+
+    var d = new Date(),
+    createdAt = d.getHours() + ':' + d.getMinutes();
+
+    socket.emit('newMessage',{
+        from:'Santanu',
+        text: "what is going on",
+        createdAt: createdAt
+    });
+    
+
+    socket.on('createMessage',(message) => {
+        console.log('create message',message);
+    });
+
+   
+
     socket.on('disconnect',()=>{
         console.log('user Disconnected');
-    })
+    });
 })
 
 
