@@ -3,6 +3,8 @@ const http = require('http');
 const express = require('express');
 const app = express();
 const socketIO = require('socket.io');
+var d = new Date(),
+createdAt = d.getHours() + ':' + d.getMinutes();
 
 const publicPath = path.join(__dirname,'../public');
 
@@ -15,18 +17,23 @@ var io = socketIO(server);
 io.on('connection',(socket)=>{
     console.log('New User Connected..')
 
-    var d = new Date(),
-    createdAt = d.getHours() + ':' + d.getMinutes();
+    // var d = new Date(),
+    // createdAt = d.getHours() + ':' + d.getMinutes();
 
-    socket.emit('newMessage',{
-        from:'Santanu',
-        text: "what is going on",
-        createdAt: createdAt
-    });
+    // socket.emit('newMessage',{
+    //     from:'Santanu',
+    //     text: "what is going on",
+    //     createdAt: createdAt
+    // });
     
 
     socket.on('createMessage',(message) => {
         console.log('create message',message);
+        io.emit('newMessage',{
+            from:message.from,
+            text:message.text,
+            createdAt:createdAt
+        })
     });
 
    

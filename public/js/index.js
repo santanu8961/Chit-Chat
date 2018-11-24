@@ -3,11 +3,11 @@ socket.on('connect',()=>{
     console.log('Server fired..');
 
   
-    socket.emit('createMessage',{
-        from:'Goutami',
-        text: "Nothings going on",
-        createdAt: Date.now()
-    });
+    // socket.emit('createMessage',{
+    //     from:'Goutami',
+    //     text: "Nothings going on",
+    //     createdAt: Date.now()
+    // });
 
 });
 socket.on('disconnect',()=>{
