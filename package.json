@@ -4,7 +4,9 @@
   "description": "chat App",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "test":"mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'"
   },
   "engines": {
     "node": "9.11.2"
@@ -16,6 +18,8 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
+    "expect": "^23.6.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.6"
   }
 }
