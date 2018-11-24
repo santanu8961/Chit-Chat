@@ -13,8 +13,8 @@ app.use(express.static(publicPath));
 const server = http.createServer(app);
 var io = socketIO(server);
 
-var generatemessage = (b)=>{
- return  { text:b}
+var generatemessage = (a,b)=>{
+ return  { from:a,text:b}
 
 }
 
@@ -42,7 +42,7 @@ io.on('connection',(socket)=>{
     });
 
     socket.on("createLocationMessage",(cords)=>{
-        io.emit('newMessage',generatemessage(`${cords.latitude} , ${cords.longitude}`))
+        io.emit('newMessage',generatemessage(`Location is`,`${cords.latitude} , ${cords.longitude}`))
     })
 
    

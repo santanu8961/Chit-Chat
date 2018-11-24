@@ -16,7 +16,7 @@ socket.on('newEmail',(email)=>{
 
 socket.on('newMessage',(message)=>{
     console.log("newMessage",message);
-    var li = `<li> ${$("#user").val()} : ${message.text}`;
+    var li = `<li> ${message.from} : ${message.text}`;
     $('#messages').append(li);
 });
 
