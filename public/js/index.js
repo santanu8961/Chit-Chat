@@ -3,11 +3,7 @@ socket.on('connect',()=>{
     console.log('Server fired..');
 
   
-    // socket.emit('createMessage',{
-    //     from:'Goutami',
-    //     text: "Nothings going on",
-    //     createdAt: Date.now()
-    // });
+   
 
 });
 socket.on('disconnect',()=>{
@@ -20,4 +16,36 @@ socket.on('newEmail',(email)=>{
 
 socket.on('newMessage',(message)=>{
     console.log("newMessage",message);
+    var li = `<li> ${$("#user").val()} : ${message.text}`;
+    $('#messages').append(li);
 });
+
+$('#message-form').on('submit',(e)=>{
+    e.preventDefault();
+
+    socket.emit('createMessage',{
+        from:$("#user").val(),
+        text: $("#name").val(),
+        createdAt: Date.now()
+    },()=>{
+
+    });
+});
+
+
+var locationButton = $("#send-location");
+locationButton.on('click',()=>{
+    if(!navigator.geolocation){
+        return alert('Geolocation is not supported by your Browser')
+    }
+
+    navigator.geolocation.getCurrentPosition((position)=>{
+        console.log(position);
+        socket.emit('createLocationMessage',{
+            latitude:position.coords.latitude,
+            longitude:position.coords.longitude
+        });
+    },(err)=>{
+        alert('Unable to fetch Location');
+    })
+})

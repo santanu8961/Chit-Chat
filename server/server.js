@@ -13,6 +13,11 @@ app.use(express.static(publicPath));
 const server = http.createServer(app);
 var io = socketIO(server);
 
+var generatemessage = (b)=>{
+ return  { text:b}
+
+}
+
 
 io.on('connection',(socket)=>{
     console.log('New User Connected..')
@@ -21,8 +26,8 @@ io.on('connection',(socket)=>{
     // createdAt = d.getHours() + ':' + d.getMinutes();
 
     // socket.emit('newMessage',{
-    //     from:'Santanu',
-    //     text: "what is going on",
+    //     from:'',
+    //     text: "",
     //     createdAt: createdAt
     // });
     
@@ -35,6 +40,10 @@ io.on('connection',(socket)=>{
             createdAt:createdAt
         })
     });
+
+    socket.on("createLocationMessage",(cords)=>{
+        io.emit('newMessage',generatemessage(`${cords.latitude} , ${cords.longitude}`))
+    })
 
    
 
