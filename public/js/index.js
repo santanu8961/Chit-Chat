@@ -14,10 +14,18 @@ socket.on('newEmail',(email)=>{
     console.log('Email connected..' ,email);
 });
 
+// https://www.google.com/maps?q=22.721300799999998,88.47411140000001
+
 socket.on('newMessage',(message)=>{
     console.log("newMessage",message);
-    var li = `<li> ${message.from} : ${message.text}`;
+    var li = `<li> ${message.from} : ${message.text}</li>`;
     $('#messages').append(li);
+});
+
+socket.on('newLocationMessage',(message)=>{
+    var li = `<li>${message.from} : <a href='${message.url}' target='_blank'>My current location</a></li>`;
+    console.log(message.url)
+    $('#messages').append(li); 
 });
 
 $('#message-form').on('submit',(e)=>{
@@ -28,7 +36,7 @@ $('#message-form').on('submit',(e)=>{
         text: $("#name").val(),
         createdAt: Date.now()
     },()=>{
-
+        // $("#name").val() = ``;
     });
 });
 

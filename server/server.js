@@ -3,7 +3,8 @@ const http = require('http');
 const express = require('express');
 const app = express();
 const socketIO = require('socket.io');
-var d = new Date(),
+var d = new Date();
+const {generateMessage,generateLocationmessage} = require('./utils/message');
 createdAt = d.getHours() + ':' + d.getMinutes();
 
 const publicPath = path.join(__dirname,'../public');
@@ -13,10 +14,7 @@ app.use(express.static(publicPath));
 const server = http.createServer(app);
 var io = socketIO(server);
 
-var generatemessage = (a,b)=>{
- return  { from:a,text:b}
 
-}
 
 
 io.on('connection',(socket)=>{
@@ -41,8 +39,9 @@ io.on('connection',(socket)=>{
         })
     });
 
-    socket.on("createLocationMessage",(cords)=>{
-        io.emit('newMessage',generatemessage(`Location is`,`${cords.latitude} , ${cords.longitude}`))
+    socket.on("createLocationMessage",(coords)=>{
+        io.emit('newLocationMessage',generateLocationmessage(`Location url`,coords.latitude,coords.longitude));
+        console.log(coords);
     })
 
    
