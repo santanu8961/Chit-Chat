@@ -7,22 +7,35 @@
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
     </head>
 
-    <body>
-        <p>Welcome To the Chat App!</p>
+    <body class="chat">
+        <!-- <p>Welcome To the Chat App!</p> -->
 
-        <ul id="messages">
+        <div class="chat__sidebar">
+            <h3>People</h3>
+            <div id="users"></div>
+        </div>
+
+        <div class="chat__main">
+
+                <ol id="messages" class="chat__messages">
             
-        </ul>
-
-        <form action="" id="message-form">
-            <input id="user" type="text" placeholder="Enter Your name">
-            <input id="name" name="message" type="text" placeholder="Message">
-            <button>Send</button>
-        </form>
-
-        <button id="send-location" onclick="">Send Location</button>
+                    </ol>
+          <div class="chat__footer">
+                <form action="" id="message-form">
+                        <input id="user" type="text" placeholder="Enter Your name">
+                        <input id="name" name="message" type="text" placeholder="Message" autocomplete="off" autofocus>
+                        <button><i style="padding:0px 10px" class="fa fa-paper-plane"></i></button>
+                    </form>
+                    <button id="send-location"  onclick="">Send Location</button>
+          </div>
+        </div>
+ 
       
     </body>
     <script src="/socket.io/socket.io.js"></script>
