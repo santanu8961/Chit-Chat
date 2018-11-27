@@ -19,7 +19,7 @@ socket.on('newEmail',(email)=>{
 socket.on('newMessage',(message)=>{
     var formattedTime = moment(new Date()).format('h:mm a')
     console.log("newMessage",message);
-    var li = `<li> ${message.from}  ${formattedTime} : ${message.text}</li>`;
+    var li = `<li> ${message.from} : ${message.text}  <span style="float:right ">${formattedTime}</span></li>`;
     $('#messages').append(li);
 });
 
