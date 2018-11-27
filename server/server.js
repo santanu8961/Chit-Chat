@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const app = express();
 const socketIO = require('socket.io');
+var moment = require('moment');
 var d = new Date();
 const {generateMessage,generateLocationmessage} = require('./utils/message');
 createdAt = d.getHours() + ':' + d.getMinutes();
@@ -23,11 +24,11 @@ io.on('connection',(socket)=>{
     // var d = new Date(),
     // createdAt = d.getHours() + ':' + d.getMinutes();
 
-    // socket.emit('newMessage',{
-    //     from:'',
-    //     text: "",
-    //     createdAt: createdAt
-    // });
+    socket.emit('newMessage',{
+        from:'',
+        text: "New User Connected",
+        createdAt: moment
+    });
     
 
     socket.on('createMessage',(message,callback) => {
@@ -49,6 +50,11 @@ io.on('connection',(socket)=>{
 
     socket.on('disconnect',()=>{
         console.log('user Disconnected');
+        socket.emit('newMessage',{
+            from:'',
+            text: "User Dissconected",
+            createdAt: moment
+        });
     });
 })
 

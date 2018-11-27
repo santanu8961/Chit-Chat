@@ -193,6 +193,7 @@
   
     .chat__footer {
       flex-direction: column;
+      height: 20%
     }
   
     .chat__footer form {
@@ -202,4 +203,5 @@
     .chat__footer button {
       margin-right: 0px;
     }
+    
   }

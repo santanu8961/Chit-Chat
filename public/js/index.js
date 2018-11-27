@@ -1,5 +1,5 @@
 var socket =  io();
-socket.on('connect',()=>{
+socket.on('connection',()=>{
     console.log('Server fired..');
 
   
@@ -17,8 +17,9 @@ socket.on('newEmail',(email)=>{
 // https://www.google.com/maps?q=22.721300799999998,88.47411140000001
 
 socket.on('newMessage',(message)=>{
+    var formattedTime = moment(new Date()).format('h:mm a')
     console.log("newMessage",message);
-    var li = `<li> ${message.from} : ${message.text}</li>`;
+    var li = `<li> ${message.from}  ${formattedTime} : ${message.text}</li>`;
     $('#messages').append(li);
 });
 
@@ -34,7 +35,6 @@ $('#message-form').on('submit',(e)=>{
     socket.emit('createMessage',{
         from:$("#user").val(),
         text: $("#name").val(),
-        createdAt: Date.now()
     },()=>{
         $("#name").val(``);
     });
